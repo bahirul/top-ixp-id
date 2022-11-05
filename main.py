@@ -76,9 +76,10 @@ try:
             ##################################
 
         else:
-            SystemExit('No data provided from peeringdb query (data len 0)')
+            raise SystemExit(
+                'No data provided from peeringdb query (data len 0)')
     else:
-        SystemExit('No data provided from peeringdb query (no key data)')
+        raise SystemExit('No data provided from peeringdb query (no key data)')
 except requests.exceptions.HTTPError as err:
     # raise request err
     raise SystemExit(err)
