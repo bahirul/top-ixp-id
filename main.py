@@ -17,27 +17,43 @@ try:
     # response as json
     responseJson = r.json()
 
+    # debug print response
+    # print(responseJson)
+
     # check repsonse has data key
     if 'data' in responseJson:
         # store data in vars
         data = responseJson['data']
+
+        # debug print data
+        # print(data)
 
         # check data len > 0
         if len(data) > 1:
             # sort data by 'net_count' key using sorted and lambda
             sortedData = sorted(
                 data, key=lambda x: x['net_count'], reverse=True)
+
+            # debug print sortedData
+            # print(sortedData)
+
             # limit data a.k.a slice
             slice = slice(LIMIT)
 
             # sliced data result
             slicedData = sortedData[slice]
 
+            # debug print slicedData
+            # print(slicedData)
+
             # array of final results
             results = []
 
             # loop and store ixp data in 'results'
             for ixp in slicedData:
+                # debug print ixp
+                # print(ixp)
+
                 # only get 'name' and 'net_count'
                 ixpData = {'name': ixp['name'],
                            'net_count': ixp['net_count']}
