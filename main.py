@@ -2,9 +2,15 @@
 import requests
 from datetime import datetime
 import json
+import sys
+
+countryArg = sys.argv[1]
+
+COUNTRY = "ID" if len(countryArg) == 0 else countryArg
 
 # peeringdb url query
-URL = "https://www.peeringdb.com/api/ix?country__in=ID&limit=250&depth=1"
+URL = "https://www.peeringdb.com/api/ix?country__in={}&limit=250&depth=1".format(
+    COUNTRY)
 
 # limit output sort
 LIMIT = 5
@@ -74,6 +80,10 @@ try:
             ##################################
             ##################################
             ##################################
+            count = 0
+            for r in results:
+                count += 1
+                print("{}. {} ({})".format(count, r['name'], r['net_count']))
 
         else:
             raise SystemExit(
